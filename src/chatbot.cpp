@@ -30,7 +30,7 @@ ChatBot::ChatBot(std::string filename)
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
 }
 
-ChatBot::~ChatBot()
+ChatBot::~ChatBot()  // 1 : destructor
 {
     std::cout << "ChatBot Destructor" << std::endl;
 
@@ -44,6 +44,17 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(const ChatBot &source)  // 2 : copy constructor
+{
+    _image = new wxBitmap(source._image->ConvertToImage());
+    *_image = *source._image;
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    std::cout << "COPYING content of instance " << &source << " to instance" << this << std::endl;
+
+}
 
 ////
 //// EOF STUDENT CODE
